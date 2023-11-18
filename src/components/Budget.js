@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
-import HandleCurrencyChange from './currencyComponent.js'
+import HandleCurrencyChange from './changeCurrency.js'
+import CurrencyDropDown from './currencyComponent'
 const Budget = () => {
-    console.log("budjet ni")
     const { budget, expenses, currency, dispatch} = useContext(AppContext);
     const [newBudget, setNewBudget] = useState(budget);
     const totalExpenses = expenses.reduce((total, item) => {
@@ -18,12 +18,7 @@ const Budget = () => {
     }
     return (
 <div className='alert alert-secondary'>
-<span>Budget: <select className="custom-select" value={currency} onChange={(event) => HandleCurrencyChange(event, dispatch)}>
-    <option value="$"> $</option>
-    <option value=" €"> €</option>
-    <option value="₹"> ₹</option>
-    <option value=" £"> £</option>
-</select>
+<span>Budget: <CurrencyDropDown />
                 {budget}</span>
                 <div>Selected Currency: {currency} </div>
 <input type="number" step="10" value={newBudget} onChange={handleBudgetChange}></input>
